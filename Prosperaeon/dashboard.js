@@ -14,7 +14,7 @@ async function fetchUserData() {
     // Fetch user details using UUID from auth.users
     const { data, error: fetchError } = await supabase
         .from("users")
-        .select("balance, plan")
+        .select("balance, plan, username")
         .eq("id", user.id)  // Match with the correct UUID
         .single();
 
