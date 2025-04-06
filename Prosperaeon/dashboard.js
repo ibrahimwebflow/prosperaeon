@@ -56,7 +56,7 @@ async function loadLatestNews() {
     list.innerHTML = '';
     data?.forEach(news => {
       const li = document.createElement('li');
-      li.innerHTML = `<strong>${news.title}</strong><br><hr>${news.message}<br><hr>`;
+      li.innerHTML = `<strong>${news.title}</strong><br><br><hr>${news.message}<br><hr>`;
       list.appendChild(li);
     });
   }
