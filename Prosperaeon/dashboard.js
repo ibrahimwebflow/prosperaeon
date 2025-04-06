@@ -48,7 +48,7 @@ if (error) {
 async function loadLatestNews() {
     const { data, error } = await supabase
       .from('latest_news')
-      .select('*')
+      .select('title, message')
      // .order('created_at', { ascending: false })
       .limit(5);
   
