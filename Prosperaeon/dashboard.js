@@ -14,7 +14,7 @@ async function fetchUserData() {
     // Fetch user details using UUID from auth.users
     const { data, error: fetchError } = await supabase
         .from("users")
-        .select("balance, plan")
+        .select("balance, plan, username")
         .eq("id", user.id)  // Match with the correct UUID
         .single();
 
@@ -28,6 +28,7 @@ async function fetchUserData() {
     // Ensure the elements exist before updating
     document.getElementById("user-balance").textContent = data.balance || "0.00";
     document.getElementById("user-plan").textContent = data.plan || "None";
+    document.getElementById("user-username").textContent = data.username || "None";
 }
 
 document.addEventListener("DOMContentLoaded", fetchUserData);
