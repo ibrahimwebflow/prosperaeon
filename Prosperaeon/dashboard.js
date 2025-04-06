@@ -28,6 +28,7 @@ async function fetchUserData() {
     // Ensure the elements exist before updating
     document.getElementById("user-balance").textContent = data.balance || "0.00";
     document.getElementById("user-plan").textContent = data.plan || "None";
+    document.getElementById("user-username").textContent = data.username || "None";
 }
 
 document.addEventListener("DOMContentLoaded", fetchUserData);
