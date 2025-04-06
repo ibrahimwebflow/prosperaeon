@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Payment Approvals</title>
+    <link rel="stylesheet" href="admin_payments.css"> <!-- Add your CSS file -->
+    <script src="supabase.js" type="module"></script> <!--Add Supabase setup -->
+</head>
+<body>
+  <script>
+    if (localStorage.getItem('admin_logged_in') !== 'true') {
+      window.location.href = "admin_login.html";
+    }
+  </script>
+
+  <h1>Welcome Admin(ProsperAeon Captain's)</h1>
+    <h2>Pending Payment Proofs (Deposit)</h2>
+    <table border="1" id="payments-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Amount</th>
+                <th>Proof</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="payments-table-body">
+            <!-- JavaScript will insert rows here -->
+        </tbody>
+    </table>
+
+    <section id="referral-users">
+        <h2>Referral Users</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Referral Code</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Balance (USD)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="referralUsersTableBody">
+            <!-- Populated by referral.js -->
+          </tbody>
+        </table>
+      </section>
+
+      <h2>Push Latest News</h2>
+<form id="news-form">
+  <input type="text" id="news-title" placeholder="News Title" required />
+  <textarea id="news-message" placeholder="News Message" required></textarea>
+  <button type="submit">Push Update</button>
+</form>
+
+<div id="latest-news-status"></div>
+
+      <h2>Pending Withdrawal Requests</h2>
+      <table id="withdrawals-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Amount</th>
+            <th>Wallet Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="withdrawals-table-body">
+          <!-- Rows will be populated by JavaScript -->
+        </tbody>
+      </table>
+
+      <button onclick="logoutAdmin()" style="margin: 20px;">Logout</button>
+
+      <script>
+        function logoutAdmin() {
+          localStorage.removeItem('admin_logged_in');
+          window.location.href = "admin_login.html";
+        }
+      </script>      
+
+    <script src="admin_withdrawals.js" type="module"></script>
+    <script type="module" src="admin_news.js"></script>
+    <script type="module" src="referral.js"></script>
+    <script src="admin-payments.js" type="module"></script> <!-- Admin payment approval JS -->
+</body>
+</html>

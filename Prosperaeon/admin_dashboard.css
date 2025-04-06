@@ -1,0 +1,108 @@
+/* admin_dashboard.css - Styles for Admin Dashboard */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.admin-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00bcd4;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover, .sidebar ul li.active a {
+    background-color: #00bcd4;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00bcd4;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+}
+
+.stat-card h3 {
+    margin-bottom: 10px;
+    color: #00bcd4;
+}
+
+.stat-card p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.recent-activity {
+    margin-top: 30px;
+}
+
+.recent-activity table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+}
+
+.recent-activity th, .recent-activity td {
+    border: 1px solid #333;
+    padding: 15px;
+    text-align: left;
+}
+
+.recent-activity th {
+    background-color: #00bcd4;
+    color: #121212;
+}
+
+.recent-activity tr:nth-child(even) {
+    background-color: #222;
+}
