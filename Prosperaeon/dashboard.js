@@ -49,7 +49,7 @@ async function loadLatestNews() {
     const { data, error } = await supabase
       .from('latest_news')
       .select('*')
-      .order('created_at', { ascending: false })
+     // .order('created_at', { ascending: false })
       .limit(5);
   
     const list = document.getElementById('news-list');
