@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CapitalCore</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- <script src="admin-payments.js" type="module"></script> -->
+    <script src="supabase.js" type="module"></script>
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>CapitalCore</h2>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#investment-plans">Investment Plans</a></li>
+                <li><a href="#deposits">Transactions</a></li>
+                <li><a href="#withdraw-section">Withdraw Funds</a></li>
+                <li><a href="#support-section">Support</a></li>
+                <li><button id="logoutBtn">Logout</button>
+                </li>
+
+            </ul>
+        </aside>
+        <main class="dashboard-content">
+            <h2>Welcome, <span id="user-email"></span></h2>
+            <div class="stats">
+                <div class="card">
+                    <h3>Account Balance</h3>
+                    <p>Balance: $<span id="user-balance"></span></p>
+                </div>
+                <div class="card">
+                    <h3>Current Plan</h3>
+                    <p>Plan: $<span id="user-plan"></span></p>
+                </div>
+                <div class="card">
+                    <h3>Daily Profit</h3>
+                    <p>Ranges</p>
+                </div>
+            </div>
+      
+<section id="investment-plans">
+    <h2>Investment Plans</h2>
+    <div class="plans-container">
+        <div class="plan" data-amount="30" data-profit="0.48 - 0.60">
+            <h3>$30 Plan</h3>
+            <p>Daily Profit: $0.48 - $0.60</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="50" data-profit="0.80 - 1.00">
+            <h3>$50 Plan</h3>
+            <p>Daily Profit: $0.80 - $1.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="100" data-profit="1.60 - 2.00">
+            <h3>$100 Plan</h3>
+            <p>Daily Profit: $1.60 - $2.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="200" data-profit="3.20 - 4.00">
+            <h3>$200 Plan</h3>
+            <p>Daily Profit: $3.20 - $4.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="500" data-profit="8.00 - 10.00">
+            <h3>$500 Plan</h3>
+            <p>Daily Profit: $8.00 - $10.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="1000" data-profit="16.00 - 20.00">
+            <h3>$1000 Plan</h3>
+            <p>Daily Profit: $16.00 - $20.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+        <div class="plan" data-amount="5000" data-profit="80.00 - 100.00">
+            <h3>$5000 Plan</h3>
+            <p>Daily Profit: $80.00 - $100.00</p>
+            <button class="pay-now">Pay Now</button>
+        </div>
+    </div>
+</section>
+
+
+
+<h2>Instant Plan Purchase</h2>
+<section class="instant-purchase">
+    <p>Use your available balance to upgrade instantly.</p>
+    <label for="planSelect">Select Plan:</label>
+    <select id="planSelect">
+        <option value="30">💰 $30 Plan</option>
+        <option value="50">💰 $50 Plan</option>
+        <option value="100">💰 $100 Plan</option>
+        <option value="200">💰 $200 Plan</option>
+        <option value="500">💰 $500 Plan</option>
+        <option value="1000">💰 $1000 Plan</option>
+        <option value="5000">💰 $5000 Plan</option>
+    </select>
+    <button id="purchasePlan">Purchase Now</button>
+    <p id="purchaseMessage"></p>
+</section>
+
+<section id="withdraw-section">
+    <h2>Withdraw Funds</h2>
+    <form id="withdraw-form">
+      <label for="withdraw-amount">Withdrawal Amount ($):</label>
+      <input type="number" id="withdraw-amount" name="withdraw-amount" min="30" placeholder="Enter amount (min $30)" required>
+  
+      <label for="wallet-address">TRC-20 Wallet Address:</label>
+      <input type="text" id="wallet-address" name="wallet-address" placeholder="Enter your TRC-20 wallet address" required>
+  
+      <button type="submit">Withdraw</button>
+    </form>
+    <p id="withdraw-message"></p>
+</section>
+
+<section id="support-section">
+    <h2>Support Center</h2>
+    <form id="supportForm">
+      <label for="supportMessage">Your Message:</label><br>
+      <textarea id="supportMessage" required></textarea><br>
+      <button type="submit">Submit Ticket</button>
+    </form>
+    <p id="supportResponse"></p>
+</section>
+
+<div>
+    <h3>Transactions</h3>
+    <ul>
+      <li onclick="showTab('deposits')">Deposits</li>
+      <li onclick="showTab('withdrawals')">Withdrawals</li>
+      <li onclick="showTab('support')">Support</li>
+    </ul>
+  
+    <div id="deposits" class="tab-content">
+      <table>
+        <thead><tr><th>#</th><th>Status</th><th>Address</th><th>Amount</th><th>ID</th></tr></thead>
+        <tbody id="deposit-table-body"></tbody>
+      </table>
+    </div>
+  
+    <div id="withdrawals" class="tab-content" style="display:none;">
+      <table>
+        <thead><tr><th>#</th><th>Amount</th><th>Status</th><th>Address</th><th>ID</th></tr></thead>
+        <tbody id="withdrawal-table-body"></tbody>
+      </table>
+    </div>
+  
+    <div id="support" class="tab-content" style="display:none;">
+      <table>
+        <thead><tr><th>#</th><th>Status</th><th>Time</th><th>ID</th></tr></thead>
+        <tbody id="support-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <section id="latest-news">
+    <h2>Latest Updates</h2>
+    <ul id="news-list"></ul>
+  </section>  
+
+</main>
+</div>
+  
+  <script>
+    function showTab(id) {
+      document.querySelectorAll(".tab-content").forEach(div => div.style.display = "none");
+      document.getElementById(id).style.display = "block";
+    }
+  </script>
+  
+  
+    <script src="user_transactions.js" type="module"></script>
+    <script src="instant.js" type="module"></script>
+    <script type="module" src="support.js"></script>
+    <script src="withdraw.js" type="module"></script>
+    <script src="dashboard.js" type="module"></script>
+    <script src="plans.js"></script> 
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login - CapitalCore</title>
+  <link rel="stylesheet" href="admin_login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form id="admin-login-form">
+        <input type="text" id="admin-username" placeholder="Admin Username" required>
+        <input type="password" id="admin-password" placeholder="Password" required>
+        <p id="error-message" style="color: red;"></p>
+        <button type="submit">Login</button>
+      </form>      
+  </div>
+
+  <script src="admin_auth.js" type="module"></script>
+</body>
+</html>

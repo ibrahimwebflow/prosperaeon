@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Payment Proof</title>
+    <link rel="stylesheet" href="proof_upload.css">
+</head>
+<body>
+    <h2>Upload Your Payment Proof</h2>
+    <p><strong>Plan Amount:</strong> <span id="plan-amount"></span></p>
+
+    <form id="proof-form">
+        <label for="trc20-address">TRC-20 Wallet Address Used:</label>
+        <input type="text" id="trc20-address" name="trc20-address" required>
+
+        <label for="proof-image">Upload Payment Proof:</label>
+        <input type="file" id="proof-image" name="proof-image" accept="image/*" required>
+
+        <button type="submit">Submit Proof</button>
+    </form>
+
+    <script src="proof-upload.js" type="module"></script>
+</body>
+</html>

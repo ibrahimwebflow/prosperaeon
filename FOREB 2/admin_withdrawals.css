@@ -1,0 +1,115 @@
+/* Base Theme */
+body {
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    margin: 0;
+  }
+  
+  /* Heading */
+  h2 {
+    color: #FFD700;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #232323;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A1A1A;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.03);
+    margin-bottom: 2rem;
+  }
+  
+  thead {
+    background-color: #232323;
+  }
+  
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    font-size: 0.95rem;
+  }
+  
+  th {
+    color: #1E90FF;
+    font-weight: bold;
+  }
+  
+  tr:hover {
+    background-color: #2C2C2C;
+  }
+  
+  /* Action Buttons */
+  button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-right: 6px;
+  }
+  
+  /* Approve Button */
+  button.approve {
+    background-color: #00C853; /* Green */
+    color: #fff;
+  }
+  
+  button.approve:hover {
+    background-color: #00a745;
+  }
+  
+  /* Reject Button */
+  button.reject {
+    background-color: #FF4500; /* Orange Red */
+    color: #fff;
+  }
+  
+  button.reject:hover {
+    background-color: #e03e00;
+  }
+  
+  /* Responsive Table (Optional for mobile) */
+  @media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+  
+    thead {
+      display: none;
+    }
+  
+    tr {
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background-color: #1A1A1A;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.02);
+    }
+  
+    td {
+      padding-left: 50%;
+      position: relative;
+      border: none;
+      border-bottom: 1px solid #333;
+    }
+  
+    td::before {
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      width: 45%;
+      color: #FFD700;
+      font-weight: bold;
+      content: attr(data-label);
+    }
+  }
+  
