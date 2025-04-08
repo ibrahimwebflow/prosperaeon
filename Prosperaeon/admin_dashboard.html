@@ -37,26 +37,22 @@
         </tbody>
     </table>
 
-    <section id="referral-users">
-        <h2>Referral Users</h2>
-        <table>
-          <thead>
+        <h2>Support Inbox</h2>
+    <table border="1" id="support-table">
+        <thead>
             <tr>
-              <th>First Name</th>
-              <th>Referral Code</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Balance (USD)</th>
-              <th>Action</th>
+                <th>User ID</th>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Status</th>
             </tr>
-          </thead>
-          <tbody id="referralUsersTableBody">
-            <!-- Populated by referral.js -->
-          </tbody>
-        </table>
-      </section>
+        </thead>
+        <tbody id="support-table-body">
+            <!-- JavaScript will insert rows here -->
+        </tbody>
+    </table>
 
-      <h2>Push Latest News</h2>
+    <h2>Push Latest News</h2>
 <form id="news-form">
   <input type="text" id="news-title" placeholder="News Title" required />
   <textarea id="news-message" placeholder="News Message" required></textarea>
@@ -82,6 +78,25 @@
         </tbody>
       </table>
 
+    <section id="referral-users">
+        <h2>Referral Users</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Referral Code</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Balance (USD)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="referralUsersTableBody">
+            <!-- Populated by referral.js -->
+          </tbody>
+        </table>
+      </section>
+
       <button onclick="logoutAdmin()" style="margin: 20px;">Logout</button>
 
       <script>
@@ -91,6 +106,7 @@
         }
       </script>      
 
+    <script src="admin_support.js" type="module"></script>
     <script src="admin_withdrawals.js" type="module"></script>
     <script type="module" src="admin_news.js"></script>
     <script type="module" src="referral.js"></script>
