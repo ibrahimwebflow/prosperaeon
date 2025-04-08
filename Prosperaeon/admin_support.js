@@ -40,8 +40,8 @@ async function fetchPendingSupport() {
                 <td>${support.message}</td>
                 <td>${support.status}</td>
                 <td>
-                    <button class="approve-support-btn" data-id="${support.id}" data-user="${support.user_id}">Approve</button>
-                    <button class="reject-support-btn" data-id="${support.id}">Attend</button>
+                    <button class="approve-btn" data-id="${support.id}" data-user="${support.user_id}">Approve</button>
+                    <button class="reject-btn" data-id="${support.id}">Attend</button>
                 </td>
             </tr>
         `;
