@@ -21,8 +21,7 @@ async function fetchPendingSupport() {
     const { data: support, error } = await supabase
         .from("support")
         .select("*")
-        .eq("status", "pending");  // ✅ Only fetch pending payments
-        .eq("status", "attended"); //Fetch attended
+        .eq("status", "pending, attended");  // ✅ Only fetch pending payments
 
     if (error) {
         console.error("❌ Error fetching support inbox:", error.message);
