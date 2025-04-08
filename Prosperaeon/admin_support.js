@@ -58,19 +58,19 @@ async function handleApproval(event) {
 
     console.log(`🔄 Settled Support ${supportId} for user ${userId}...`);
 
-    // ✅ Fetch the payment details to get the purchased plan
-    const { data: support, error: fetchError } = await supabase
-        .from("support")
-        .select("status") // Assuming amount corresponds to plan
-        .eq("id", supportId)
-        .single();
+    // // ✅ Fetch the payment details to get the purchased plan
+    // const { data: support, error: fetchError } = await supabase
+    //     .from("support")
+    //     .select("status") // Assuming amount corresponds to plan
+    //     .eq("id", supportId)
+    //     .single();
 
-    if (fetchError || !support) {
-        console.error("❌ Error fetching support details:", fetchError?.message);
-        return;
-    }
+    // if (fetchError || !support) {
+    //     console.error("❌ Error fetching support details:", fetchError?.message);
+    //     return;
+    // }
 
-    const purchasedPlan = support.status; // Extract plan from payment amount
+    // const purchasedPlan = support.status; // Extract plan from payment amount
 
     // ✅ Step 1: Mark payment as approved in Supabase
     let { error: updateError } = await supabase
