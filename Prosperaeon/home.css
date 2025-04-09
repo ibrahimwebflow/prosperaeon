@@ -227,6 +227,7 @@
     border-radius: 12px;
     font-style: italic;
     width:100%;
+    text-align:center;
     box-shadow: 6px 6px 12px #0a0a0a, -6px -6px 12px #1e1e1e;
 }
   
