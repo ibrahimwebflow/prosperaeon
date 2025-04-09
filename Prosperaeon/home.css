@@ -220,6 +220,14 @@
     margin-top: 1rem;
     color: #FFD700;
   }
+
+.test {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-style: italic;
+    box-shadow: 6px 6px 12px #0a0a0a, -6px -6px 12px #1e1e1e;
+}
   
   /* CONTACT SECTION */
   .contact-section ul {
