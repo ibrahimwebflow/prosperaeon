@@ -224,9 +224,9 @@
   .test {
     background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 50%;
     font-style: italic;
-    width:100%;
+    width:80%;
     color:blue;
     text-shadow:1px 1px 2px #fff;
     text-align:center;
