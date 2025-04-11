@@ -224,7 +224,7 @@
   .test {
     background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
-    border-radius: 50%;
+    border-radius: 20px;
     font-style: italic;
     width:80%;
     color:blue;
