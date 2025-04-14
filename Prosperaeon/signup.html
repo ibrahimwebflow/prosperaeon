@@ -49,6 +49,32 @@
         </form>
         <p>Already have an account? <a href="login.html" class="link">Login</a></p>
     </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const refCode = urlParams.get("ref");
+      
+          if (refCode) {
+            document.getElementById("referralCode").value = refCode;
+          }
+        });
+      </script>
+      
+    <script>
+        // Function to extract referral code from URL (e.g., ?ref=abc123)
+        function getReferralCode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                // Store referral code in localStorage for later use after signup
+                localStorage.setItem('prosperaeon_referral_code', refCode);
+                console.log('Referral code saved:', refCode);
+            }
+        }
+        
+        // Run it on page load
+        window.onload = getReferralCode;
+    </script>        
     <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> -->
     <!-- <script src="auth.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

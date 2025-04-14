@@ -1,21 +1,21 @@
-import { supabase } from "./supabase.js";  // Import Supabase Client
+import { supabase } from "./supabase.js";  // Supabase Client
 
-async function fetchUserData() {
+document.addEventListener("DOMContentLoaded", async () => {
     // Get authenticated user
-    const { data: { user }, error } = await supabase.auth.getUser();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    if (error || !user) {
-        console.error("Error fetching user:", error?.message || "No user logged in");
+    if (authError || !user) {
+        console.error("Error fetching user:", authError?.message || "User not logged in");
         return;
     }
 
-    console.log("Authenticated User:", user);
+    console.log("✅ Authenticated User:", user);
 
-    // Fetch user details using UUID from auth.users
-    const { data, error: fetchError } = await supabase
+    // Fetch user profile data
+    const { data: userData, error: fetchError } = await supabase
         .from("users")
-        .select("balance, plan, username")
-        .eq("id", user.id)  // Match with the correct UUID
+        .select("balance, plan, username, generated_referral_code")
+        .eq("id", user.id)
         .single();
 
     if (fetchError) {
@@ -23,41 +23,51 @@ async function fetchUserData() {
         return;
     }
 
-    console.log("User Details:", data);
+    console.log("✅ User Details:", userData);
 
-    // Ensure the elements exist before updating
-    document.getElementById("user-balance").textContent = data.balance || "0.00";
-    document.getElementById("user-plan").textContent = data.plan || "None";
-    document.getElementById("user-username").textContent = data.username || "None";
-}
+    // Update DOM
+    if (document.getElementById("user-balance")) {
+        document.getElementById("user-balance").textContent = userData.balance || "0.00";
+    }
+    if (document.getElementById("user-plan")) {
+        document.getElementById("user-plan").textContent = userData.plan || "None";
+    }
+    if (document.getElementById("user-username")) {
+        document.getElementById("user-username").textContent = userData.username || "None";
+    }
 
-document.addEventListener("DOMContentLoaded", fetchUserData);
-if (!supabase || !supabase.auth) {
-    console.error("Supabase auth is not initialized correctly.");
-} else {
-    const { data: { user }, error } = await supabase.auth.getUser();
-if (error) {
-    console.error("Error fetching user:", error);
-} else {
-    console.log("Authenticated User:", user);
-}
-    console.log("Authenticated User:", user);
-}
+    // Update referral code
+    if (document.getElementById("referralCode")) {
+        document.getElementById("referralCode").textContent = userData.generated_referral_code || "N/A";
+    }
 
+    // Load latest news
+    await loadLatestNews();
+});
 
+// ✅ Load latest 5 news items
 async function loadLatestNews() {
     const { data, error } = await supabase
-      .from('latest_news')
-      .select('title, message')
-     // .order('created_at', { ascending: false })
-      .limit(5);
-  
+        .from('latest_news')
+        .select('title, message')
+        .limit(5);
+
+    if (error) {
+        console.error("❌ Error fetching latest news:", error.message);
+        return;
+    }
+
     const list = document.getElementById('news-list');
+    if (!list) return;
+
     list.innerHTML = '';
-    data?.forEach(news => {
-      const li = document.createElement('li');
-      li.innerHTML = `<strong>${news.title}</strong><br><br><hr>${news.message}<br><hr>`;
-      list.appendChild(li);
+    data.forEach(news => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${news.title}</strong><br><br><hr>${news.message}<br><hr>`;
+        list.appendChild(li);
     });
-  }
-  loadLatestNews();
+}
+
+
+
+

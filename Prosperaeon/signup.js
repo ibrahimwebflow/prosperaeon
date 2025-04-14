@@ -1,4 +1,14 @@
-import { supabase } from "./supabase.js";  // Import Supabase Client
+import { supabase } from "./supabase.js";
+
+// Function to generate a random referral code
+function generateReferralCode(length = 8) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
+    for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
 
 async function signUpUser(firstName, lastName, country, email, username, password, referralCode) {
     // Step 1: Sign up user in Supabase Auth
@@ -12,31 +22,63 @@ async function signUpUser(firstName, lastName, country, email, username, passwor
         return;
     }
 
-    // Step 2: Insert user data into the "users" table
-    const { data: userData, error: userError } = await supabase
+    const newUserId = authData.user.id;
+    const generatedReferralCode = generateReferralCode();
+
+    // Step 2: Insert into users table
+    const { error: userError } = await supabase
         .from("users")
         .insert([
             {
-                id: authData.user.id,  // Store auth user ID
+                id: newUserId,
                 first_name: firstName,
                 last_name: lastName,
                 country: country,
                 email: email,
                 username: username,
-                referral_code: referralCode
+                referral_code: referralCode,                // what user entered
+                generated_referral_code: generatedReferralCode // your unique code
             }
         ]);
 
     if (userError) {
-        console.error("Database Insert Error:", userError.message);
+        console.error("User Insert Error:", userError.message);
         return;
     }
 
-    console.log("Signup Success:", authData);
-    window.location.href = "dashboard.html";  // Redirect on success
+    // Step 3: If referral code was entered, save referral relationship
+    if (referralCode && referralCode.trim() !== "") {
+        const { data: referrer, error: findError } = await supabase
+            .from("users")
+            .select("id")
+            .eq("generated_referral_code", referralCode)
+            .single();
+
+        if (findError) {
+            console.warn("Invalid referral code entered.");
+        } else {
+            const { error: referralInsertError } = await supabase
+                .from("referral_user")
+                .insert([
+                    {
+                        referrer_id: referrer.id,
+                        referred_id: newUserId
+                    }
+                ]);
+
+            if (referralInsertError) {
+                console.error("Referral relationship insert error:", referralInsertError.message);
+            } else {
+                console.log("Referral relationship recorded.");
+            }
+        }
+    }
+
+    console.log("Signup complete!");
+    window.location.href = "dashboard.html";
 }
 
-// Example: Handle form submission
+// Handle form submit
 document.getElementById("signupForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -50,6 +92,3 @@ document.getElementById("signupForm").addEventListener("submit", async (event) =
 
     await signUpUser(firstName, lastName, country, email, username, password, referralCode);
 });
-
-
-

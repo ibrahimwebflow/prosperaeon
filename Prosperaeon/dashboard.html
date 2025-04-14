@@ -32,7 +32,6 @@
         </aside>
         <main class="dashboard-content">
             <h2>Welcome <span id="user-username"></span>,
-            <br><br>Kindly Note that your referral code is your Username above </h2>
             <div class="stats">
                 <div class="card">
                     <h3>Account Balance</h3>
@@ -162,6 +161,22 @@
     </div>
   </div>
 
+  <div id="referralSection">
+    <h3>Your Referral Info</h3>
+  
+    <p><strong>Referral Code:</strong> <span id="referralCode">Loading...</span></p>
+  
+    <p><strong>Total Referrals:</strong> <span id="referralCount"></span></p>
+  
+    <p>
+      <strong>Your Referral Link:</strong>
+      <a href="#" id="referralLink" target="_blank">Generating...</a>
+      <button onclick="copyReferralLink()">Copy Link</button>
+    </p>
+  </div>
+  
+
+
   <section id="latest-news">
     <h2>Latest Updates</h2>
     <ul id="news-list"></ul>
@@ -176,8 +191,16 @@
       document.getElementById(id).style.display = "block";
     }
   </script>
+  <script>
+    function copyReferralLink() {
+    const linkText = document.getElementById("referralLink").innerText;
+    navigator.clipboard.writeText(linkText).then(() => {
+        alert("Referral link copied to clipboard!");
+    });
+}
+  </script>
   
-  
+    <script type="module" src="referral_dashboard.js"></script>
     <script src="user_transactions.js" type="module"></script>
     <script src="instant.js" type="module"></script>
     <script type="module" src="support.js"></script>
