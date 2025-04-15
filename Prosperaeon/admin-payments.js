@@ -58,10 +58,10 @@ async function handleApproval(event) {
 
     console.log(`🔄 Approving payment ${paymentId} for user ${userId}...`);
 
-    // ✅ Fetch the payment details to get the purchased plan
+    // Step 1: Fetch payment details
     const { data: payment, error: fetchError } = await supabase
         .from("payment_proofs")
-        .select("amount") // Assuming amount corresponds to plan
+        .select("amount")
         .eq("id", paymentId)
         .single();
 
@@ -70,12 +70,26 @@ async function handleApproval(event) {
         return;
     }
 
-    const purchasedPlan = payment.amount; // Extract plan from payment amount
+    const purchasedPlan = payment.amount;
 
-    // ✅ Step 1: Mark payment as approved in Supabase
-    let { error: updateError } = await supabase
+    // Step 2: Get current user details
+    const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("plan, plan_bought_at, referral_code")
+        .eq("id", userId)
+        .single();
+
+    if (userError || !userData) {
+        console.error("❌ Error fetching user data:", userError.message);
+        return;
+    }
+
+    const alreadyHasPlan = !!userData.plan_bought_at;
+
+    // Step 3: Update payment status
+    const { error: updateError } = await supabase
         .from("payment_proofs")
-        .update({ status: "approved" })  // ✅ Update status
+        .update({ status: "approved" })
         .eq("id", paymentId);
 
     if (updateError) {
@@ -85,20 +99,54 @@ async function handleApproval(event) {
 
     console.log(`✅ Payment ${paymentId} marked as approved.`);
 
-    // ✅ Step 2: Update user's plan based on the approved amount
-    let { error: planError } = await supabase
+    // Step 4: Update user plan (and plan_bought_at if first plan)
+    const updates = {
+        plan: purchasedPlan,
+        ...(alreadyHasPlan ? {} : { plan_bought_at: new Date().toISOString() })
+    };
+
+    const { error: planError } = await supabase
         .from("users")
-        .update({ plan: purchasedPlan })  // ✅ Set new plan
+        .update(updates)
         .eq("id", userId);
 
     if (planError) {
-        console.error("❌ Error updating user's plan:", planError.message);
+        console.error("❌ Error updating user plan:", planError.message);
         return;
     }
 
     console.log(`✅ User ${userId} updated to plan $${purchasedPlan}.`);
 
-    // ✅ Step 3: Remove the transaction row from the table
+    // Step 5: Give 10% referral reward (only if first time)
+    if (!alreadyHasPlan && userData.referral_code) {
+        // Find the referrer
+        const { data: referrerData, error: referrerError } = await supabase
+            .from("users")
+            .select("id, balance")
+            .eq("generated_referral_code", userData.referral_code)
+            .single();
+
+        if (referrerError || !referrerData) {
+            console.warn("⚠️ No referrer found for this user.");
+        } else {
+            const reward = purchasedPlan * 0.1;
+
+            const newBalance = (referrerData.balance || 0) + reward;
+
+            const { error: rewardError } = await supabase
+                .from("users")
+                .update({ balance: newBalance })
+                .eq("id", referrerData.id);
+
+            if (rewardError) {
+                console.error("❌ Error updating referrer balance:", rewardError.message);
+            } else {
+                console.log(`🎉 Referrer ${referrerData.id} earned $${reward.toFixed(2)} (10%).`);
+            }
+        }
+    }
+
+    // Step 6: Remove approved row
     button.closest("tr").remove();
     console.log(`🗑️ Removed transaction ${paymentId} from table.`);
 }
