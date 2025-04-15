@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 document.addEventListener("click", function (event) {
     if (event.target.classList.contains("approve-support-btn")) {
-        handleApproval(event);
+        handleSettling(event);
     }
 });
 
@@ -40,7 +40,7 @@ async function fetchPendingSupport() {
                 <td>${support.message}</td>
                 <td>${support.status}</td>
                 <td>
-                    <button class="approve-support-btn" data-id="${support.id}" data-user="${support.user_id}">Approve</button>
+                    <button class="approve-support-btn" data-id="${support.id}" data-user="${support.user_id}">Settle</button>
                     <button class="reject-support-btn" data-id="${support.id}">Attend</button>
                 </td>
             </tr>
@@ -51,7 +51,7 @@ async function fetchPendingSupport() {
 }
 
 
-async function handleApproval(event) {
+async function handleSettling(event) {
     const button = event.target;
     const supportId = button.getAttribute("data-id");
     const userId = button.getAttribute("data-user");
