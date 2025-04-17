@@ -431,14 +431,14 @@ ul.tabs li:hover {
   .plans-container {
     grid-template-columns: 1fr;
   }
-  
+/*   
   table, thead, tbody, th, td, tr {
     display: block;
   }
   
   thead {
     display: none;
-  }
+  } */
   
   tr {
     margin-bottom: 1rem;
