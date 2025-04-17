@@ -38,7 +38,12 @@ body.dark-theme {
   padding: 2rem 1.5rem;
   position: sticky;
   top: 0;
+<<<<<<< HEAD
   /* height: 100vh; */
+=======
+  bottom: 0;
+  height: 100vh;
+>>>>>>> 99774687812f6929818be1f6369809583a23e25b
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
 }
 
