@@ -151,6 +151,56 @@ async function handleApproval(event) {
     console.log(`🗑️ Removed transaction ${paymentId} from table.`);
 }
 
+async function handleReferralEarning(referredUserId, investmentAmount) {
+    // Step 1: Get referred user's referral_code (the one they used to sign up)
+    const { data: referredUserData, error: refUserErr } = await supabase
+        .from("users")
+        .select("referral_code") // the code they used to sign up
+        .eq("id", referredUserId)
+        .single();
+
+    if (refUserErr || !referredUserData?.referral_code) return;
+
+    const usedReferralCode = referredUserData.referral_code;
+
+    // Step 2: Get the user who owns this referral code
+    const { data: referrerData, error: referrerErr } = await supabase
+        .from("users")
+        .select("id")
+        .eq("generated_referral_code", usedReferralCode)
+        .single();
+
+    if (referrerErr || !referrerData) return;
+
+    const referrerId = referrerData.id;
+
+    // Step 3: Check if already earned from this referral (prevent duplicate reward)
+    const { data: existingEarning } = await supabase
+        .from("referral_earnings")
+        .select("id")
+        .eq("referred_user_id", referredUserId)
+        .single();
+
+    if (existingEarning) return; // Already rewarded
+
+    // Step 4: Insert earning (10%)
+    const rewardAmount = investmentAmount * 0.10;
+
+    const { error: insertErr } = await supabase.from("referral_earnings").insert([
+        {
+            referrer_id: referrerId,
+            referred_user_id: referredUserId,
+            amount_earned: rewardAmount
+        }
+    ]);
+
+    if (insertErr) {
+        console.error("Referral reward error:", insertErr.message);
+    } else {
+        console.log("✅ Referral reward added for referrer:", referrerId);
+    }
+}
+
   
 async function handleRejection(event) {
     const paymentId = event.target.getAttribute("data-id");
