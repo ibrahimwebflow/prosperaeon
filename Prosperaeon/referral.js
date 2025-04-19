@@ -63,7 +63,9 @@ window.filterReferralUsers = function () {
     (user.first_name || '').toLowerCase().includes(query) ||
     (user.username || '').toLowerCase().includes(query) ||
     (user.email || '').toLowerCase().includes(query) ||
-    (user.referral_code || '').toLowerCase().includes(query)
+    (user.referral_code || '').toLowerCase().includes(query) ||
+    (user.id || '').toLowerCase().includes(query) ||
+    (user.balance || '').toLowerCase().includes(query)
   );
 
   renderUsers(filteredUsers);
