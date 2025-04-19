@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 document.addEventListener("click", function (event) {
     if (event.target.classList.contains("approve-btn")) {
         handleApproval(event);
+        handleReferralEarning(event); // <— call your referral reward logic here
     }
 });
 
