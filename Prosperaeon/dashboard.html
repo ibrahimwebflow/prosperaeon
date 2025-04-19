@@ -13,6 +13,30 @@
     <title>Dashboard - ProsperAeon</title>
     <link rel="stylesheet" href="dashboard.css">
     <!-- <script src="admin-payments.js" type="module"></script> -->
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userPlan = parseInt(document.getElementById('user-plan').textContent.trim());
+    const profitRangeEl = document.getElementById('user-profit-range');
+
+    // Define variable ranges for each plan
+    const profitRanges = {
+      30: "$0.48 - $0.60",
+      50: "$0.80 - $1.00",
+      100: "$1.60 - $2.00",
+      200: "$3.20 - $4.00",
+      500: "$8.00 - $10.00",
+      1000: "$16.00 - $20.00",
+      5000: "$80.00 - $100.00"
+    };
+
+    // Display estimated range if plan is valid
+    if (profitRanges[userPlan]) {
+      profitRangeEl.textContent = `${profitRanges[userPlan]} (estimated)`;
+    } else {
+      profitRangeEl.textContent = "No active plan selected";
+    }
+  });
+</script>
     <script src="supabase.js" type="module"></script>
 </head>
 <body class="dark-theme">
