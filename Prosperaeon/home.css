@@ -133,6 +133,25 @@
   .about-text, .about-image {
     flex: 1;
   }
+
+/* Halal Section */
+
+.halal-section {
+  background-color: #232323;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  color: #ffffff;
+  text-align: left;
+}
+.halal-section ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+.halal-section li {
+  margin-bottom: 0.5rem;
+}
+
   
   /* PLANS SECTION */
   .plans-grid {
