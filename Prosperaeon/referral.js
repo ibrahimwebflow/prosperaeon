@@ -19,6 +19,7 @@ async function loadReferralUsers() {
       <td>${user.username}</td>
       <td>${user.email}</td>
       <td>${user.id}</td>
+      <td>${user.balance}</td>
       <td>
         <input type="number" value="${user.balance}" id="balance-${user.id}" />
       </td>
