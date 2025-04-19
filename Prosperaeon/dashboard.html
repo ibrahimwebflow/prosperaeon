@@ -13,12 +13,46 @@
     <title>Dashboard - ProsperAeon</title>
     <link rel="stylesheet" href="dashboard.css">
     <!-- <script src="admin-payments.js" type="module"></script> -->
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const userPlan = parseInt(document.getElementById('user-plan').textContent.trim());
+    <script type="module">
+  import { supabase } from './supabase.js';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Fetch logged-in user
+    const {
+      data: { user },
+      error: userError
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      console.error("User not logged in:", userError);
+      window.location.href = "/login.html"; // or redirect accordingly
+      return;
+    }
+
+    // Fetch user details from your database table (e.g., 'users')
+    const { data: userData, error: fetchError } = await supabase
+      .from('users')
+      .select('username, balance, plan')
+      .eq('id', user.id)
+      .single();
+
+    if (fetchError || !userData) {
+      console.error("Error fetching user data:", fetchError);
+      return;
+    }
+
+    // Update dashboard values
+    document.getElementById('user-username').textContent = userData.username || "User";
+    document.getElementById('user-balance').textContent = userData.balance || "0.00";
+    document.getElementById('user-plan').textContent = userData.plan || "0";
+
+    // Now update the daily profit range
+    updateProfitRange(userData.plan);
+  });
+
+  function updateProfitRange(planAmount) {
     const profitRangeEl = document.getElementById('user-profit-range');
 
-    // Define variable ranges for each plan
     const profitRanges = {
       30: "$0.48 - $0.60",
       50: "$0.80 - $1.00",
@@ -29,13 +63,12 @@
       5000: "$80.00 - $100.00"
     };
 
-    // Display estimated range if plan is valid
-    if (profitRanges[userPlan]) {
-      profitRangeEl.textContent = `${profitRanges[userPlan]} (estimated)`;
+    if (profitRanges[planAmount]) {
+      profitRangeEl.textContent = `${profitRanges[planAmount]} (real profit share)`;
     } else {
       profitRangeEl.textContent = "No active plan selected";
     }
-  });
+  }
 </script>
     <script src="supabase.js" type="module"></script>
 </head>
