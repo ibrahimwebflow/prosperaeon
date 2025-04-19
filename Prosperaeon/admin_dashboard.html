@@ -78,26 +78,36 @@
         </tbody>
       </table>
 
-    <section id="referral-users">
-        <h2>Referral Users</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Referral Code</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>User ID</th>
-              <th>Current Balance (USD)</th>
-              <th>Change Balance (USD)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="referralUsersTableBody">
-            <!-- Populated by referral.js -->
-          </tbody>
-        </table>
-      </section>
+<section id="referral-users">
+  <h2>Referral Users</h2>
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search by name, username, email or referral code..."
+    oninput="filterReferralUsers()"
+    style="margin-bottom: 1rem; padding: 0.5rem; width: 100%; max-width: 400px;"
+  />
+
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Referral Code</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>User ID</th>
+        <th>Current Balance (USD)</th>
+        <th>Change Balance (USD)</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="referralUsersTableBody">
+      <!-- Populated by referral.js -->
+    </tbody>
+  </table>
+</section>
+
 
       <button onclick="logoutAdmin()" style="margin: 20px;">Logout</button>
 
