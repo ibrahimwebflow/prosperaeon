@@ -1,5 +1,7 @@
 import { supabase } from './supabase.js';
 
+let allUsers = []; // Global to store all loaded users
+
 async function loadReferralUsers() {
   const { data: users, error } = await supabase.from('users').select('*');
   if (error) {
@@ -7,6 +9,11 @@ async function loadReferralUsers() {
     return;
   }
 
+  allUsers = users;
+  renderUsers(users);
+}
+
+function renderUsers(users) {
   const tableBody = document.getElementById('referralUsersTableBody');
   tableBody.innerHTML = '';
 
@@ -46,6 +53,20 @@ window.updateUserBalance = async function (userId) {
   } else {
     alert('Balance updated successfully');
   }
+};
+
+// Live search
+window.filterReferralUsers = function () {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+
+  const filteredUsers = allUsers.filter(user =>
+    (user.first_name || '').toLowerCase().includes(query) ||
+    (user.username || '').toLowerCase().includes(query) ||
+    (user.email || '').toLowerCase().includes(query) ||
+    (user.referral_code || '').toLowerCase().includes(query)
+  );
+
+  renderUsers(filteredUsers);
 };
 
 loadReferralUsers();
