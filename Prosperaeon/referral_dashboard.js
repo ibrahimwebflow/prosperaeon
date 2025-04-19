@@ -56,3 +56,47 @@ async function loadReferralInfo() {
 }
 
 loadReferralInfo();
+
+
+async function loadReferralEarnings() {
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) return;
+
+    const userId = user.id;
+
+    // ✅ Fetch earnings linked to this user
+    const { data: earnings, error: earnErr } = await supabase
+        .from("referral_earnings")
+        .select("amount_earned, created_at, referred_user_id")
+        .eq("referrer_id", userId);
+
+    if (earnErr) {
+        console.error("Error loading referral earnings:", earnErr);
+        return;
+    }
+
+    let total = 0;
+    const listElem = document.getElementById("referralEarningsList");
+    const totalElem = document.getElementById("totalReferralEarnings");
+    listElem.innerHTML = "";
+
+    for (const earn of earnings) {
+        total += parseFloat(earn.amount_earned || 0);
+
+        // Optional: fetch referred user's email/username
+        const { data: userData, error: userErr } = await supabase
+            .from("users")
+            .select("username")
+            .eq("id", earn.referred_user_id)
+            .single();
+
+        const referredUsername = userData?.username || "Anonymous";
+
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${referredUsername}</strong>: $${earn.amount_earned} on ${new Date(earn.created_at).toLocaleDateString()}`;
+        listElem.appendChild(li);
+    }
+
+    if (totalElem) totalElem.innerText = `$${total.toFixed(2)}`;
+}
+
