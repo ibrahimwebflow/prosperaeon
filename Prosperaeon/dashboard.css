@@ -98,10 +98,6 @@ body.dark-theme {
   margin-bottom: 3rem;
 }
 
-#daily {
-  text-size: 5px;
-}
-
 .card {
   background: var(--bg-secondary);
   border-radius: var(--card-radius);
@@ -399,6 +395,9 @@ ul.tabs li:hover {
   color: var(--text-primary);
 }
 
+#daily {
+  text-size: 5px;
+}
 /* ======================= ANIMATIONS ======================= */
 @keyframes fadeInUp {
   0% {
