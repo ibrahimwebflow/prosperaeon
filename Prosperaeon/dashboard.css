@@ -396,7 +396,7 @@ ul.tabs li:hover {
 }
 
 #daily {
-  text-size: 5px;
+  font-size: 5px;
 }
 /* ======================= ANIMATIONS ======================= */
 @keyframes fadeInUp {
