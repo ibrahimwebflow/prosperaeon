@@ -434,14 +434,18 @@ ul.tabs li:hover {
   .plans-container {
     grid-template-columns: 1fr;
   }
-  
+  /*
   table, thead, tbody, th, td, tr {
     overflow-x:auto;
   }
-  /*
+  
   thead {
     display: none;
   } */
+
+  div#transaction {
+    overflow-x: auto;
+  }
   
   tr {
     margin-bottom: 1rem;
