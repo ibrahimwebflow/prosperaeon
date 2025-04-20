@@ -448,6 +448,7 @@ ul.tabs li:hover {
     border-radius: 8px;
     background-color: var(--bg-secondary);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
   }
   
   td {
@@ -456,6 +457,7 @@ ul.tabs li:hover {
     text-align: right;
     border: none;
     border-bottom: 1px solid #444;
+    overflow-x: auto;
   }
   
   td::before {
@@ -466,6 +468,7 @@ ul.tabs li:hover {
     font-weight: bold;
     color: var(--accent-gold);
     content: attr(data-label);
+    overflow-x: auto;
   }
 }
 
