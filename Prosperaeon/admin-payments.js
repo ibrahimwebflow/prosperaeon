@@ -117,7 +117,7 @@ async function handleApproval(event) {
 
     console.log(`✅ User ${userId} updated to plan $${purchasedPlan}.`);
 
-    // Step 5: Give 10% referral reward (only if first time)
+    // Step 5: Give 15% referral reward (only if first time)
     if (!alreadyHasPlan && userData.referral_code) {
         // Find the referrer
         const { data: referrerData, error: referrerError } = await supabase
@@ -129,7 +129,7 @@ async function handleApproval(event) {
         if (referrerError || !referrerData) {
             console.warn("⚠️ No referrer found for this user.");
         } else {
-            const reward = purchasedPlan * 0.1;
+            const reward = purchasedPlan * 0.15;
 
             const newBalance = (referrerData.balance || 0) + reward;
 
@@ -141,7 +141,7 @@ async function handleApproval(event) {
             if (rewardError) {
                 console.error("❌ Error updating referrer balance:", rewardError.message);
             } else {
-                console.log(`🎉 Referrer ${referrerData.id} earned $${reward.toFixed(2)} (10%).`);
+                console.log(`🎉 Referrer ${referrerData.id} earned $${reward.toFixed(2)} (15%).`);
             }
         }
     }
