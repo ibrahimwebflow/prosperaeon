@@ -280,6 +280,15 @@
   }
   
   /* FOOTER */
+
+  #arrow{
+      color:blue;
+      font-size: 20px;
+      position:fixed;
+      bottom:0;
+      right:0;
+  }
+
   .footer {
     background-color: #232323;
     text-align: center;
