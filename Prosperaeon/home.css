@@ -283,10 +283,10 @@
 
   #arrow{
       color:blue;
-      font-size: 20px;
+      font-size: 60px;
       position:fixed;
       bottom:0;
-      right:0;
+      right:50px;
   }
 
   .footer {
