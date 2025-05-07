@@ -12,36 +12,38 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
  * Fetch and render promoter applications
  */
 export async function loadApplications() {
-  try {
-    const { data, error } = await supabase
-      .from('promoter_applications')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    const tbody = document.getElementById('applicationsTable');
-    if (error) throw error;
-
-    tbody.innerHTML = data.map(app => `
-      <tr id="row-${app.id}">
-        <td>${app.full_name}</td>
-        <td>${app.email}</td>
-        <td>${app.phone}</td>
-        <td>$${app.investment.toFixed(2)}</td>
-        <td>${app.reason}</td>
-        <td>${new Date(app.created_at).toLocaleString()}</td>
-        <td>${app.status}</td>
-        <td>
-      <button onclick="updateStatus('${app.id}', 'shortlisted')">✅ Shortlist</button>
-      <button onclick="updateStatus('${app.id}', 'rejected')">❌ Reject</button>
-        </td>
-      </tr>
-    `).join('');
-  } catch (err) {
-    console.error('Error loading applications:', err);
-    const tbody = document.getElementById('applicationsTable');
-    tbody.innerHTML = '<tr><td colspan="6">Error loading data.</td></tr>';
+    try {
+      const { data, error } = await supabase
+        .from('promoter_applications')
+        .select('*')
+        .in('status', ['pending', 'shortlisted']) // ✅ Only fetch pending and shortlisted
+        .order('created_at', { ascending: false });
+  
+      const tbody = document.getElementById('applicationsTable');
+      if (error) throw error;
+  
+      tbody.innerHTML = data.map(app => `
+        <tr id="row-${app.id}">
+          <td>${app.full_name}</td>
+          <td>${app.email}</td>
+          <td>${app.phone}</td>
+          <td>$${app.investment.toFixed(2)}</td>
+          <td>${app.reason}</td>
+          <td>${new Date(app.created_at).toLocaleString()}</td>
+          <td>${app.status}</td>
+          <td>
+            <button onclick="updateStatus('${app.id}', 'shortlisted')">✅ Shortlist</button>
+            <button onclick="updateStatus('${app.id}', 'rejected')">❌ Reject</button>
+          </td>
+        </tr>
+      `).join('');
+    } catch (err) {
+      console.error('Error loading applications:', err);
+      const tbody = document.getElementById('applicationsTable');
+      tbody.innerHTML = '<tr><td colspan="8">Error loading data.</td></tr>';
+    }
   }
-}
+  
 
 // Automatically load on DOM ready
 window.addEventListener('DOMContentLoaded', loadApplications);
@@ -62,4 +64,3 @@ window.updateStatus = async function (id, newStatus) {
       console.error(err);
     }
   };
-  
