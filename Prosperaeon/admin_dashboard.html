@@ -161,6 +161,26 @@
         </table>
       </main>
 
+    <!-- Email Approval Section -->
+<div class="email-approval-section">
+  <h3>Send Approval Email</h3>
+  
+  <form id="approval-email-form">
+    <label for="recipient-email">Recipient Email:</label>
+    <input type="email" id="recipient-email" name="recipient-email" required>
+    
+    <label for="receiver-name">Receiver's Name:</label>
+    <input type="text" id="receiver-name" name="receiver-name" required>
+    
+    <!-- Optionally, you can add a dropdown for selecting the template -->
+    <button type="submit">Send Approval Email</button>
+  </form>
+  
+  <p id="email-status-message"></p>
+</div>
+
+<!-- You can add CSS for styling the form in your admin dashboard -->
+
       <button onclick="logoutAdmin()" style="margin: 20px;">Logout</button>
       <a href="#" ><button>Go Up</button></a>
 
