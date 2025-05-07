@@ -22,7 +22,7 @@ export async function loadApplications() {
     if (error) throw error;
 
     tbody.innerHTML = data.map(app => `
-      <tr>
+      <tr id="row-${app.id}">
         <td>${app.full_name}</td>
         <td>${app.email}</td>
         <td>${app.phone}</td>
@@ -30,6 +30,10 @@ export async function loadApplications() {
         <td>${app.reason}</td>
         <td>${new Date(app.created_at).toLocaleString()}</td>
         <td>${app.status}</td>
+        <td>
+      <button onclick="updateStatus('${app.id}', 'shortlisted')">✅ Shortlist</button>
+      <button onclick="updateStatus('${app.id}', 'rejected')">❌ Reject</button>
+        </td>
       </tr>
     `).join('');
   } catch (err) {
@@ -41,3 +45,21 @@ export async function loadApplications() {
 
 // Automatically load on DOM ready
 window.addEventListener('DOMContentLoaded', loadApplications);
+
+window.updateStatus = async function (id, newStatus) {
+    try {
+      const { error } = await supabase
+        .from('promoter_applications')
+        .update({ status: newStatus })
+        .eq('id', id);
+  
+      if (error) throw error;
+  
+      // Reload only the updated row (or refresh the entire list)
+      document.getElementById(`row-${id}`).remove();
+    } catch (err) {
+      alert('Error updating status.');
+      console.error(err);
+    }
+  };
+  
