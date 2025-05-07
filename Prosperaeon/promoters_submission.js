@@ -27,7 +27,7 @@ export async function loadApplications() {
           <td>${app.full_name}</td>
           <td>${app.email}</td>
           <td>${app.phone}</td>
-          <td>$${app.investment.toFixed(2)}</td>
+          <td>$${app.investment}</td>
           <td>${app.reason}</td>
           <td>${new Date(app.created_at).toLocaleString()}</td>
           <td>${app.status}</td>
