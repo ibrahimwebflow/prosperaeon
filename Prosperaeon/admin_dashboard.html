@@ -109,6 +109,33 @@
 </section>
 
 
+    <aside class="sidebar">
+        <h2>ProsperAeon Admin</h2>
+        <nav>
+          <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/form-submissions" class="active">Form Submissions</a></li>
+          </ul>
+        </nav>
+      </aside>
+    
+      <main>
+        <h1>Promoter Applications</h1>
+        <table id="applicationsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Investment</th>
+              <th>Reason</th>
+              <th>Submitted At</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </main>
+
       <button onclick="logoutAdmin()" style="margin: 20px;">Logout</button>
 
       <script>
@@ -118,6 +145,7 @@
         }
       </script>      
 
+    <script src="promoters_submission.js" type="module"></script>
     <script src="admin_support.js" type="module"></script>
     <script src="admin_withdrawals.js" type="module"></script>
     <script type="module" src="admin_news.js"></script>
