@@ -47,4 +47,33 @@ document.getElementById('news-form').addEventListener('submit', async (e) => {
       }
     }
   });
+
+async function loadNewsTable() {
+  const { data, error } = await supabase
+    .from('latest_news')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const tbody = document.getElementById('news-table-body');
+  tbody.innerHTML = ''; // Clear before re-render
+
+  if (error) {
+    console.error('Load failed:', error);
+    tbody.innerHTML = '<tr><td colspan="3">Failed to load news.</td></tr>';
+    return;
+  }
+
+  data.forEach(news => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${news.title}</td>
+      <td>${news.message}</td>
+      <td>${new Date(news.created_at).toLocaleString()}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+loadNewsTable();
+
   
