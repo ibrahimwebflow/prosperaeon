@@ -1,4 +1,29 @@
 /* admin_dashboard.css - Styles for Admin Dashboard */
+:root {
+    --bg-dark: #0F0F0F;
+    --bg-sidebar: #232323;
+    --bg-main: #1A1A1A;
+    --text-light: #FFFFFF;
+    --accent-yellow: #FFD700;
+    --shadow: rgba(0,0,0,0.5);
+    --radius: 12px;
+    --spacing: 1rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { display: flex; height: 100vh; background: var(--bg-dark); color: var(--text-light); font-family: 'Segoe UI', sans-serif; }
+  .sidebar { width: 220px; background: var(--bg-sidebar); padding: var(--spacing); box-shadow: 4px 0 8px var(--shadow); }
+  .sidebar-title { color: var(--accent-yellow); font-size: 1.5rem; margin-bottom: var(--spacing); }
+  .sidebar-nav a { display: block; padding: 0.5rem var(--spacing); color: var(--text-light); text-decoration: none; border-radius: var(--radius); margin-bottom: 0.5rem; transition: background 0.2s; }
+  .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(255, 255, 255, 0.1); }
+  .main-content { flex: 1; padding: calc(var(--spacing) * 1.5); background: var(--bg-main); overflow-y: auto; }
+  .main-title { font-size: 1.75rem; margin-bottom: var(--spacing); }
+  .table-container { overflow-x: auto; }
+  .applications-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  thead tr { background: var(--bg-sidebar); }
+  th, td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; font-size: 0.9rem; }
+  th { position: sticky; top: 0; background: var(--bg-sidebar); }
+  tbody tr:hover { background: rgba(255,255,255,0.05); }
+  
 
 body {
     font-family: Arial, sans-serif;
