@@ -1,0 +1,105 @@
+/*=====================================
+  ProsperAeon Promoter Registration Form
+  Theme: Obsidian Depths Neumorphic
+=====================================*/
+:root {
+    --bg-app: #0F0F0F;
+    --bg-card: #232323;
+    --accent-blue: #1E90FF;
+    --text-primary: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --shadow-highlight: rgba(255, 255, 255, 0.05);
+    --radius: 12px;
+    --spacing: 1rem;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: var(--bg-app);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing);
+  }
+  .form-container {
+    width: 100%;
+    max-width: 480px;
+  }
+  .form-title {
+    text-align: center;
+    margin-bottom: var(--spacing);
+    font-size: 1.75rem;
+  }
+  .form-card {
+    background: var(--bg-card);
+    padding: calc(var(--spacing) * 1.5);
+    border-radius: var(--radius);
+    backdrop-filter: blur(8px);
+    box-shadow:
+      8px 8px 16px var(--shadow),
+      -8px -8px 16px var(--shadow-highlight);
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing);
+  }
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--bg-app);
+    box-shadow: inset 4px 4px 8px var(--shadow), inset -4px -4px 8px var(--shadow-highlight);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: box-shadow 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    box-shadow:
+      inset 4px 4px 8px var(--shadow),
+      inset -4px -4px 8px var(--shadow-highlight),
+      0 0 0 3px var(--accent-blue);
+  }
+  .submit-btn {
+    width: 100%;
+    padding: var(--spacing);
+    margin-top: var(--spacing);
+    background: var(--accent-blue);
+    color: #FFF;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    box-shadow: 4px 4px 8px var(--shadow), -4px -4px 8px var(--shadow-highlight);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px var(--shadow), -6px -6px 12px var(--shadow-highlight);
+  }
+  .form-message {
+    margin-top: var(--spacing);
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .form-message.error {
+    color: #FF4500;
+  }
+  .form-message.success {
+    color: #FFD700;
+  }
+  
