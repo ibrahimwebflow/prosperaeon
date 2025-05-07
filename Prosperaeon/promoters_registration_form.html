@@ -2,12 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ProsperAeon Promoter Application</title>
-  <link rel="stylesheet" href="promoters_registration_form.css">
+  <link rel="stylesheet" href="promoters_registration_form.css" />
   <link rel="icon" href="images/prosperaeon.png"/>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <main class="form-container">
@@ -26,8 +25,8 @@
         <input type="tel" id="phone" placeholder="e.g. +1234567890" required />
       </div>
       <div class="form-group">
-        <label for="investAmount">Proof of Investment (Deposit ID)</label>
-        <input type="text" id="investAmount" placeholder="Your Deposit ID" required />
+        <label for="depositId">Proof of Investment (Deposit ID)</label>
+        <input type="text" id="depositId" placeholder="Your Deposit ID" required />
       </div>
       <div class="form-group">
         <label for="reason">Why ProsperAeon?</label>
@@ -40,36 +39,48 @@
 
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-  
-    // Initialize Supabase
+
     const SUPABASE_URL = 'https://usopwzufmbuthknylquz.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVzb3B3enVmbWJ1dGhrbnlscXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMyODQ1NTQsImV4cCI6MjA1ODg2MDU1NH0.EJd2eGAK2c-I4qDGQmG-QGW0leWiLu5pme08qrSZHHU';
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  
+
     document.getElementById('promoterForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fullName = document.getElementById('fullName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const investAmount = document.getElementById('investAmount').value;
-      const reason = document.getElementById('reason').value;
-  
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const depositId = document.getElementById('depositId').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+      const msgEl = document.getElementById('message');
+
+      // Basic validation
+      if (!fullName || !email || !phone || !depositId || !reason) {
+        msgEl.textContent = 'All fields are required.';
+        msgEl.className = 'form-message error';
+        return;
+      }
+
       const { error } = await supabase
         .from('promoter_applications')
-        .insert([{ full_name: fullName, email, phone, investment: investAmount, reason }]);
-  
-      const msgEl = document.getElementById('message');
+        .insert([{
+          full_name: fullName,
+          email,
+          phone,
+          investment: depositId, // If this is a string ID, keep as is. If it's a number, parseFloat.
+          reason
+        }]);
+
       if (error) {
         msgEl.textContent = 'Submission failed. Please try again.';
-        msgEl.classList.add('text-red-500');
+        msgEl.className = 'form-message error';
+        console.error(error);
       } else {
         msgEl.textContent = 'Application submitted! We will review and get back to you.';
-        msgEl.classList.add('text-green-600');
+        msgEl.className = 'form-message success';
         document.getElementById('promoterForm').reset();
       }
     });
   </script>
-  
-
 </body>
 </html>
