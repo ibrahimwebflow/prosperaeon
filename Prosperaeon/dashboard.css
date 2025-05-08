@@ -1,0 +1,477 @@
+/* ======================= GLOBAL RESET & VARIABLES ======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #0F0F0F;         /* Jet Black */
+  --bg-secondary: #232323;       /* Dark Gray */
+  --text-primary: #FFFFFF;       /* White */
+  --accent-blue: #1E90FF;        /* Dodger Blue */
+  --accent-gold: #FFD700;        /* Gold */
+  --accent-red: #FF4500;         /* Orange Red */
+  --card-radius: 20px;
+  --transition-speed: 0.3s;
+}
+
+/* ======================= BASE STYLES ======================= */
+body.dark-theme {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* ======================= CONTAINER STRUCTURE ======================= */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ======================= SIDEBAR ======================= */
+.sidebar {
+  width: 250px;
+  background-color: var(--bg-secondary);
+  padding: 2rem 1.5rem;
+  position: sticky;
+  top: 0;
+  /* height: 100vh; */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--accent-blue);
+  margin-bottom: 2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar ul li a,
+.sidebar ul li button {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li button:hover,
+.sidebar ul li a.active {
+  background-color: var(--accent-blue);
+  color: #fff;
+}
+
+/* ======================= DASHBOARD CONTENT ======================= */
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+}
+
+.dashboard-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ======================= STATS CARDS ======================= */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border-radius: var(--card-radius);
+  padding: 1.8rem;
+  flex: 1;
+  min-width: 220px;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.15);
+  backdrop-filter: blur(8px);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.3);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1.1rem;
+}
+
+/* ======================= INVESTMENT PLANS SECTION ======================= */
+#investment-plans {
+  margin-bottom: 3rem;
+}
+
+#investment-plans h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accent-gold);
+  text-align: center;
+}
+
+.plans-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.plan {
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  transition: transform var(--transition-speed) ease;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+}
+
+.plan h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-gold);
+}
+
+.plan p {
+  margin-bottom: 1rem;
+}
+
+.plan button {
+  padding: 0.7rem 1.2rem;
+  background-color: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.plan button:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* ======================= INSTANT PURCHASE SECTION ======================= */
+.instant-purchase {
+  background-color: var(--bg-secondary);
+  padding: 1.8rem;
+  border-radius: var(--card-radius);
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.instant-purchase label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.instant-purchase select,
+.instant-purchase button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.instant-purchase button {
+  background-color: var(--accent-blue);
+  color: #fff;
+  font-weight: bold;
+}
+
+.instant-purchase button:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* ======================= FORMS (WITHDRAW & SUPPORT) ======================= */
+form {
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+form button {
+  padding: 1rem;
+  background-color: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+form button:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* ======================= TRANSACTION TABLES ======================= */
+table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  background-color: var(--bg-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+table thead {
+  background-color: var(--accent-blue);
+}
+
+table th, table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+  font-size: 0.9rem;
+}
+
+table th {
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+table tr:hover {
+  background-color: #2a2a2a;
+}
+
+/* ======================= TABS (For Transactions) ======================= */
+ul.tabs {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+ul.tabs li {
+  display: inline-block;
+  background-color: var(--accent-blue);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease;
+  font-weight: bold;
+}
+
+ul.tabs li:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* ======================= REFERRAL SECTION ======================= */
+#referralSection {
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#referralSection h3 {
+  margin-bottom: 1rem;
+  color: var(--accent-gold);
+}
+
+#referralSection p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+#referralSection a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+#referralSection a:hover {
+  text-decoration: underline;
+}
+
+#referralSection button {
+  margin-top: 0.8rem;
+  background-color: var(--accent-blue);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease;
+}
+
+#referralSection button:hover {
+  background-color: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* ======================= LATEST NEWS ======================= */
+#latest-news {
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  max-width: 800px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#latest-news h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--accent-gold);
+}
+
+#latest-news ul {
+  list-style: disc;
+  padding-left: 2rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+#daily {
+  font-size: 10px;
+}
+/* ======================= ANIMATIONS ======================= */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ======================= RESPONSIVE DESIGN ======================= */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 1rem;
+  }
+  
+  .dashboard-content {
+    padding: 1rem;
+  }
+  
+  .stats {
+    flex-direction: column;
+  }
+  
+  .plans-container {
+    grid-template-columns: 1fr;
+  }
+  /*
+  table, thead, tbody, th, td, tr {
+    overflow-x:auto;
+  }
+  
+  thead {
+    display: none;
+  } */
+
+  div#transaction {
+    overflow-x: auto;
+  }
+  
+  tr {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  td {
+    padding-left: 50%;
+    position: relative;
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid #444;
+  }
+  
+  td::before {
+    position: absolute;
+    left: 10px;
+    width: 40%;
+    text-align: left;
+    font-weight: bold;
+    color: var(--accent-gold);
+    content: attr(data-label);
+  }
+}
+
+
+  
