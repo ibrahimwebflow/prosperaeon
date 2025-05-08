@@ -36,10 +36,11 @@ body.dark-theme {
   width: 250px;
   background-color: var(--bg-secondary);
   padding: 2rem 1.5rem;
-  position: sticky;
+  position: fixed;
   top: 0;
   height: 100vh;
-  overflow-x: scroll;
+  overflow-y: scroll;
+  width: fit-content;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
 }
 
