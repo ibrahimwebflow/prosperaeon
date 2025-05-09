@@ -10,7 +10,7 @@ function generateReferralCode(length = 8) {
     return code;
 }
 
-async function signUpUser(firstName, lastName, country, email, username, password, referralCode) {
+async function signUpUser(firstName, lastName, country, email, tel, username, password, referralCode) {
     // Step 1: Sign up user in Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
         email: email,
@@ -35,6 +35,7 @@ async function signUpUser(firstName, lastName, country, email, username, passwor
                 last_name: lastName,
                 country: country,
                 email: email,
+                tel: tel,
                 username: username,
                 referral_code: referralCode,                // what user entered
                 generated_referral_code: generatedReferralCode // your unique code
@@ -86,9 +87,10 @@ document.getElementById("signupForm").addEventListener("submit", async (event) =
     const lastName = document.getElementById("lastName").value;
     const country = document.getElementById("country").value;
     const email = document.getElementById("email").value;
+    const tel = document.getElementById('tel').value;
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const referralCode = document.getElementById("referralCode").value;
 
-    await signUpUser(firstName, lastName, country, email, username, password, referralCode);
+    await signUpUser(firstName, lastName, country, email, tel, username, password, referralCode);
 });
