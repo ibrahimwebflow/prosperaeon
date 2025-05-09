@@ -25,6 +25,7 @@ function renderUsers(users) {
       <td>${user.referral_code || '-'}</td>
       <td>${user.username}</td>
       <td>${user.email}</td>
+      <td>${user.tel}</td>
       <td>${user.id}</td>
       <td>${user.balance}</td>
       <td>${user.plan}</td>
