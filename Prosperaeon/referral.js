@@ -27,6 +27,7 @@ function renderUsers(users) {
       <td>${user.email}</td>
       <td>${user.id}</td>
       <td>${user.balance}</td>
+      <td>${user.plan}</td>
       <td>
         <input type="number" value="${user.balance}" id="balance-${user.id}" />
       </td>
