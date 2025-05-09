@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body class="dark-theme">
+  <div id="preloader">
+  <div class="loader-text" id="loaderText"></div>
+</div>
   <header class="hero-section">
     <div class="hero-content">
 <!--       <h2 style="position: fixed; top: 0;">We're back from scheduled maintenance</h2> -->
@@ -207,6 +210,40 @@
     <p>&copy; 2025 ProsperAeon. All rights reserved.</p>
     <p>Built for smart, ethical investors.</p>
   </footer>
+
+  <script>
+  const word = "PROSPERAEON";
+  const loaderText = document.getElementById("loaderText");
+  let index = 0;
+  let forward = true;
+
+  function typeEffect() {
+    loaderText.textContent = word.slice(0, index);
+
+    if (forward) {
+      index++;
+      if (index > word.length) {
+        forward = false;
+        setTimeout(typeEffect, 500); // pause before backspace
+        return;
+      }
+    } else {
+      index--;
+      if (index === 0) forward = true;
+    }
+
+    setTimeout(typeEffect, 150);
+  }
+
+  typeEffect();
+
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    setTimeout(() => {
+      preloader.classList.add("fade-out");
+    }, 2500); // fade out after animation cycle
+  });
+  </script>
 
 </body>
 </html>
