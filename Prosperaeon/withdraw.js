@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const walletAddress = document.getElementById("wallet-address").value.trim();
 
     // Validate minimum withdrawal amount
-    if (amount < 15) {
-      withdrawMessage.textContent = "Minimum withdrawal amount is $15.";
+    if (amount < 30) {
+      withdrawMessage.textContent = "Minimum withdrawal amount is $30.";
       return;
     }
     // Validate if user has enough balance
