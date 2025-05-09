@@ -211,15 +211,27 @@
     <p>&copy; 2025 ProsperAeon. All rights reserved.</p>
     <p>Built for smart, ethical investors.</p>
   </footer>
-<script>
-  window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
+
+  <script>
+// Minimum display time for loader (in milliseconds)
+const MIN_LOAD_TIME = 7000; // 7 seconds
+const startTime = Date.now();
+
+window.addEventListener("load", () => {
+  const elapsed = Date.now() - startTime;
+  const delay = Math.max(0, MIN_LOAD_TIME - elapsed);
 
   setTimeout(() => {
-    const loader = document.getElementById("loader");
-    if (loader) loader.remove();
-  }, 800); // After exit animation
+    // Start the fade-out animation
+    document.body.classList.add("loaded");
+
+    // Wait for CSS transition to finish before removing loader
+    setTimeout(() => {
+      const loader = document.getElementById("loader");
+      if (loader) loader.remove();
+    }, 800); // Match the CSS transition time
+  }, delay);
 });
-</script>
+    </script>
 </body>
 </html>
