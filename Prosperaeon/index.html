@@ -19,7 +19,10 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body class="dark-theme">
-
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="loader-text">ProsperAeon</div>
+</div>
   <header class="hero-section">
     <div class="hero-content">
 <!--       <h2 style="position: fixed; top: 0;">We're back from scheduled maintenance</h2> -->
@@ -208,8 +211,15 @@
     <p>&copy; 2025 ProsperAeon. All rights reserved.</p>
     <p>Built for smart, ethical investors.</p>
   </footer>
+<script>
+  window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
 
-  
-
+  setTimeout(() => {
+    const loader = document.getElementById("loader");
+    if (loader) loader.remove();
+  }, 800); // After exit animation
+});
+</script>
 </body>
 </html>
