@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body class="dark-theme">
+  <div id="loader">
+  <div class="loader-animation">P</div>
+  </div>
   <header class="hero-section">
     <div class="hero-content">
 <!--       <h2 style="position: fixed; top: 0;">We're back from scheduled maintenance</h2> -->
@@ -207,5 +210,13 @@
     <p>&copy; 2025 ProsperAeon. All rights reserved.</p>
     <p>Built for smart, ethical investors.</p>
   </footer>
+  <script>
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = 0;
+    loader.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => loader.style.display = 'none', 500);
+  });
+  </script>
 </body>
 </html>
