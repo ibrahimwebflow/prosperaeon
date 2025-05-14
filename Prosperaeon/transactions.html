@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="author" content="Ibrahim Temitope ~ Introibrotech ~ Full Stack Developer"/>
+<!-- Meta Description -->
+  <meta name="description" content="ProsperAeon is a modern investment platform blending digital innovation with real-world business returns. Join today to grow your wealth through diversified ventures including stock trading, import/export, and more.">
+
+<!-- Meta Keywords -->
+  <meta name="keywords" content="ProsperAeon, investment platform, digital wealth, real business profits, forex alternative, stock market, import export investment, passive income, halal investment, online earnings">
+  <link rel="icon" href="images/prosperaeon.png"/>
+    <title>User Transactions - ProsperAeon</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <script src="admin-payments.js" type="module"></script> -->
+    <script src="supabase.js" type="module"></script>
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <!-- <h2>ProsperAeon</h2> -->
+            <div class="menu-icon" onclick="toggleMenu()">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="investments_plans.html">Investment Plans</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="withdraw.html">Withdraw Funds</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="referral.html">Referral</a></li>
+                <li><a href="instant.html">Instant</a></li>
+                <li><a href="news.html">Latest News</a></li>
+                <li><button id="logoutBtn">Logout</button>
+                </li>
+
+            </ul>
+        </aside>
+        <main class="dashboard-content">
+<div id="transaction">
+    <h3>Transactions</h3>
+    <ul>
+      <li onclick="showTab('deposits')">Deposits</li>
+      <li onclick="showTab('withdrawals')">Withdrawals</li>
+      <li onclick="showTab('support')">Support</li>
+    </ul>
+  
+    <div id="deposits" class="tab-content">
+      <table>
+        <thead><tr><th>#</th><th>Status</th><th>Address</th><th>Amount</th><th>ID</th></tr></thead>
+        <tbody id="deposit-table-body"></tbody>
+      </table>
+    </div>
+  
+    <div id="withdrawals" class="tab-content" style="display:none;">
+      <table>
+        <thead><tr><th>#</th><th>Amount</th><th>Status</th><th>Address</th><th>ID</th></tr></thead>
+        <tbody id="withdrawal-table-body"></tbody>
+      </table>
+    </div>
+  
+    <div id="support" class="tab-content" style="display:none;">
+      <table>
+        <thead><tr><th>#</th><th>Status</th><th>Time</th><th>ID</th></tr></thead>
+        <tbody id="support-table-body"></tbody>
+      </table>
+    </div>
+  </div><br/><br/><br/>
+
+</main>
+</div>
+    <script>
+    function showTab(id) {
+      document.querySelectorAll(".tab-content").forEach(div => div.style.display = "none");
+      document.getElementById(id).style.display = "block";
+    }
+  </script>
+  <script>
+function toggleMenu() {
+  let menu = document.querySelector(".nav-links");
+  let icon = document.querySelector(".menu-icon i");
+
+  // Toggle menu visibility
+  menu.classList.toggle("active");
+
+  // Change icon when menu is active
+  if (menu.classList.contains("active")) {
+    icon.classList.remove("fa-bars");
+    icon.classList.add("fa-times");
+  } else {
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
+  }
+}
+</script>
+
+ <script>
+function toggleMenu() {
+  document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
+    <script src="user_transactions.js" type="module"></script>
+    <script src="dashboard.js" type="module"></script>
+
+</body>
+</html> 
