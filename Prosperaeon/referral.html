@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="author" content="Ibrahim Temitope ~ Introibrotech ~ Full Stack Developer"/>
+<!-- Meta Description -->
+  <meta name="description" content="ProsperAeon is a modern investment platform blending digital innovation with real-world business returns. Join today to grow your wealth through diversified ventures including stock trading, import/export, and more.">
+
+<!-- Meta Keywords -->
+  <meta name="keywords" content="ProsperAeon, investment platform, digital wealth, real business profits, forex alternative, stock market, import export investment, passive income, halal investment, online earnings">
+  <link rel="icon" href="images/prosperaeon.png"/>
+    <title>Referral Info - ProsperAeon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- <script src="admin-payments.js" type="module"></script> -->
+    <script src="supabase.js" type="module"></script>
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <!-- <h2>ProsperAeon</h2> -->
+            <div class="menu-icon" onclick="toggleMenu()">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="investments_plans.html">Investment Plans</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="withdraw.html">Withdraw Funds</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="referral.html">Referral</a></li>
+                <li><a href="instant.html">Instant</a></li>
+                <li><a href="news.html">Latest News</a></li>
+                <li><button id="logoutBtn">Logout</button>
+                </li>
+
+            </ul>
+        </aside>
+        <main class="dashboard-content">
+  <div id="referralSection">
+    <h3>Your Referral Info</h3>
+  
+    <p><strong>Referral Code:</strong> <span id="referralCode">Loading...</span></p>
+  
+    <p><strong>Total Referrals:</strong> <span id="referralCount"></span></p>
+  
+    <p>
+      <strong>Your Referral Link:</strong>
+      <a href="#" id="referralLink" target="_blank">Generating...</a><br/>
+      <button onclick="copyReferralLink()">Copy Link</button>
+    </p>
+  </div>
+</main>
+</div>
+  <script>
+    function copyReferralLink() {
+    const linkText = document.getElementById("referralLink").innerText;
+    navigator.clipboard.writeText(linkText).then(() => {
+        alert("Referral link copied to clipboard!");
+    });
+}
+  </script>
+  <script>
+function toggleMenu() {
+  let menu = document.querySelector(".nav-links");
+  let icon = document.querySelector(".menu-icon i");
+
+  // Toggle menu visibility
+  menu.classList.toggle("active");
+
+  // Change icon when menu is active
+  if (menu.classList.contains("active")) {
+    icon.classList.remove("fa-bars");
+    icon.classList.add("fa-times");
+  } else {
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
+  }
+}
+</script>
+
+ <script>
+function toggleMenu() {
+  document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>
+    <script type="module" src="referral_dashboard.js"></script>
+    <script src="dashboard.js" type="module"></script>
+
+</body>
+</html> 
