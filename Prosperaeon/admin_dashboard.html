@@ -22,6 +22,8 @@
   </script>
 
   <h1>Welcome Admin(ProsperAeon Captain's)</h1>
+  <button onclick="toggleSidebar()" class="sidebar-toggle">☰ Menu</button>
+
 
         <aside class="sidebar">
         <h2>ProsperAeon Admin</h2>
@@ -130,10 +132,8 @@
         <th>Referral Code</th>
         <th>Username</th>
         <th>Email</th>
-        <th>Phone Number</th>
         <th>User ID</th>
         <th>Current Balance (USD)</th>
-        <th>Current Plans</th>
         <th>Change Balance (USD)</th>
         <th>Action</th>
       </tr>
@@ -229,6 +229,20 @@
 });
 
       </script>
+<script>
+function toggleSidebar() {
+  let sidebar = document.querySelector(".sidebar");
+
+  // Toggle sidebar visibility
+  if (sidebar.style.transform === "translateX(500px)") {
+    sidebar.style.transform = "translateX(-500px)"; // Hide sidebar
+  } else {
+    sidebar.style.transform = "translateX(500px)"; // Show sidebar
+  }
+}
+</script>
+
+
 
     <script src="promoters_submission.js" type="module"></script>
     <script src="admin_support.js" type="module"></script>

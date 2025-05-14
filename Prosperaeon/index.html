@@ -44,6 +44,10 @@
     </ul>
   </nav>
   
+  <div id="loading-spinner">
+  <div class="spinner"></div>
+</div>
+
 
   <section id="about" class="about-section">
     <div class="about-text">
@@ -234,6 +238,18 @@
       document.querySelector(".nav-links").classList.toggle("active");
     }
     </script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  let loader = document.getElementById("loading-spinner");
+  
+  // Simulate loading delay
+  setTimeout(() => {
+    loader.style.display = "none"; // Hide the spinner after load
+  }, 2000);
+});
+</script>
+
     
 </body>
 </html>
