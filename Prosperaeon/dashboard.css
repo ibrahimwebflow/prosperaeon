@@ -450,5 +450,9 @@ button:hover {
   .sidebar {
     background-color: white;
   }
+
+  #transaction {
+    width: fit-content;
+  }
 }
 
