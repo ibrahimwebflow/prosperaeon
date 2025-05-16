@@ -418,7 +418,7 @@ button:hover {
     display: block;
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 0;
     z-index: 999;
   }
 
