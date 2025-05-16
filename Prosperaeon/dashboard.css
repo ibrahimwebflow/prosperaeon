@@ -462,5 +462,9 @@ button:hover {
   .tab-content table {
   width: 100vw;
   }
+
+  #referralLink {
+  width: inherit;
+}
 }
 
