@@ -464,7 +464,7 @@ button:hover {
   }
 
   #referralLink {
-  width: inherit;
+  font-size: 10px;
 }
 }
 
