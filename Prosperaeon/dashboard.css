@@ -456,8 +456,11 @@ button:hover {
   }
 
   #transaction ul {
-  display: block;
   gap: 10px;
-}
+  }
+
+  .tab-content table {
+  width: 100vw;
+  }
 }
 
