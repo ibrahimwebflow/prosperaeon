@@ -454,5 +454,10 @@ button:hover {
   #transaction {
     width: fit-content;
   }
+
+  #transaction ul {
+  display: block;
+  gap: 10px;
+}
 }
 
